@@ -19,3 +19,6 @@ Programa que obtiene una cantidad deseada del usuario y los convierte en figuras
 
 ### BlackJack
 Programa que crea un juego de cartas llamado BlackJack.
+
+### PrimerExamen
+Programa que determina el día de la semana de una fecha.
