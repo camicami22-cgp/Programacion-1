@@ -1,8 +1,9 @@
 Proceso CalificacionesTarea2
 	// Nombre del archivo: CalificacionesTarea2
-	// Descripción: Algoritmo que calcula las calificaiónes de los estudiantes y los clasifica
-	// Autores: Camila Galindo Páramo y Victor Ailem Martinez Martinez 
+	// Descripciï¿½n: Algoritmo que calcula las calificaiï¿½nes de los estudiantes y los clasifica
+	// Autores: Camila Galindo Pï¿½ramo y Victor Ailem Martinez Martinez 
 	// Fecha: 16/09/2026 
+	//Practica de Introduccion
 	
 	Definir Estudiante, EstudiantesC, ContadorSobre, ContadorRegulares, ContadorRescatar, ContadorR Como Entero
 	Definir Examen1, Examen2, Examen3, SumatoriaE, PromedioAct, Sobresaliente, Suficiente Como Real
@@ -13,13 +14,13 @@ Proceso CalificacionesTarea2
 	ContadorR <- 0
 	
 	Escribir "---------------------------------------------------------------------------------------------------------------------------"
-	Escribir "Algoritmo que ayuda a calcular cuál es la calificación que se necesita para aprobar, al igual que los clasifica y promedia."
+	Escribir "Algoritmo que ayuda a calcular cuï¿½l es la calificaciï¿½n que se necesita para aprobar, al igual que los clasifica y promedia."
 	Escribir "---------------------------------------------------------------------------------------------------------------------------"
 	Escribir SinSaltar "Ingrese la cantidad de estudiantes: "
 	Leer EstudiantesC
 	
 	Mientras EstudiantesC <= 0 Hacer
-		Escribir "Error: Se debe ingresar un número entero mayor a 0."
+		Escribir "Error: Se debe ingresar un nï¿½mero entero mayor a 0."
 		Escribir SinSaltar "Por favor, ingrese la cantidad de estudiantes nuevamente: "
 		Leer EstudiantesC
 	FinMientras
@@ -31,33 +32,33 @@ Proceso CalificacionesTarea2
 		Escribir "Registro de estudiante ", Estudiante, " de ", EstudiantesC
 		Escribir ""
 		
-		Escribir Sin Saltar "Ingrese la calificación del Examen 1 (0 a 100): "
+		Escribir Sin Saltar "Ingrese la calificaciï¿½n del Examen 1 (0 a 100): "
 		Leer Examen1
 		Mientras Examen1 < 0 O Examen1 > 100 Hacer
-			Escribir "Error: La calificación debe estar entre 0 y 100"
-			Escribir Sin Saltar "Ingrese la calificación del Examen 1 nuevamente: "
+			Escribir "Error: La calificaciï¿½n debe estar entre 0 y 100"
+			Escribir Sin Saltar "Ingrese la calificaciï¿½n del Examen 1 nuevamente: "
 			Leer Examen1
 		FinMientras
 		
-		Escribir Sin Saltar "Ingrese la calificación del Examen 2 (0 a 100): " 
+		Escribir Sin Saltar "Ingrese la calificaciï¿½n del Examen 2 (0 a 100): " 
 		Leer Examen2
 		Mientras Examen2 < 0 O Examen2 > 100 Hacer
-			Escribir "Error: La calificación debe estar entre 0 y 100"
-			Escribir Sin Saltar "Ingrese la calificación del Examen 2 nuevamente: " 
+			Escribir "Error: La calificaciï¿½n debe estar entre 0 y 100"
+			Escribir Sin Saltar "Ingrese la calificaciï¿½n del Examen 2 nuevamente: " 
 			Leer Examen2
 		FinMientras
 		
-		Escribir Sin Saltar "Ingrese la calificación del Examen 3 (0 a 100): " 
+		Escribir Sin Saltar "Ingrese la calificaciï¿½n del Examen 3 (0 a 100): " 
 		Leer Examen3
 		Mientras Examen3 < 0 O Examen3 > 100 Hacer
-			Escribir "Error: La calificación debe estar entre 0 y 100"
-			Escribir Sin Saltar "Ingrese la calificación del Examen 3 nuevamente: " 
+			Escribir "Error: La calificaciï¿½n debe estar entre 0 y 100"
+			Escribir Sin Saltar "Ingrese la calificaciï¿½n del Examen 3 nuevamente: " 
 			Leer Examen3
 		FinMientras
 		
 		SumatoriaE <- Examen1 + Examen2 + Examen3
 		
-		// Se redondea al entero que este más cerca 
+		// Se redondea al entero que este mï¿½s cerca 
 		PromedioAct <- trunc((SumatoriaE / 3) + 0.5)
 		
 		Sobresaliente <- 360 - SumatoriaE
@@ -70,40 +71,40 @@ Proceso CalificacionesTarea2
 		
 		//Se evalua para la meta de 90
 		Si Sobresaliente <= 0 Entonces
-			Escribir "Calificación necesaria para promedio 90: 0 (Meta alcanzable)"
+			Escribir "Calificaciï¿½n necesaria para promedio 90: 0 (Meta alcanzable)"
 		Sino
 			Si Sobresaliente <= 100 Entonces
-				Escribir "Calificación necesaria para promedio 90: ", Sobresaliente, " (Meta alcanzable)"
+				Escribir "Calificaciï¿½n necesaria para promedio 90: ", Sobresaliente, " (Meta alcanzable)"
 			Sino
-				Escribir "Calificación necesaria para promedio 90: ", Sobresaliente, " (Meta NO alcanzable)"
+				Escribir "Calificaciï¿½n necesaria para promedio 90: ", Sobresaliente, " (Meta NO alcanzable)"
 			FinSi
 		FinSi
 		
 		//Se evalua para la meta de 60
 		Si Suficiente <= 0 Entonces
-			Escribir "Calificación necesaria para promedio 60: 0 (Meta alcanzable)"
+			Escribir "Calificaciï¿½n necesaria para promedio 60: 0 (Meta alcanzable)"
 		Sino
 			Si Suficiente <= 100 Entonces
-				Escribir "Calificación necesaria para promedio 60: ", Suficiente, " (Meta alcanzable)"
+				Escribir "Calificaciï¿½n necesaria para promedio 60: ", Suficiente, " (Meta alcanzable)"
 			Sino
-				Escribir "Calificación necesaria para promedio 60: ", Suficiente, " (Meta NO alcanzable)"
+				Escribir "Calificaciï¿½n necesaria para promedio 60: ", Suficiente, " (Meta NO alcanzable)"
 			FinSi
 		FinSi
 		
 		//Se categoriza
 		Si Sobresaliente <= 100 Entonces
-			Escribir "Categoría: Sobresaliente potencial"
+			Escribir "Categorï¿½a: Sobresaliente potencial"
 			ContadorSobre <- ContadorSobre + 1
 		Sino
 			Si Suficiente > 100 Entonces
-				Escribir "Categoría: Reprobado inevitable"
+				Escribir "Categorï¿½a: Reprobado inevitable"
 				ContadorR <- ContadorR + 1
 			Sino
 				Si PromedioAct < 60 Entonces
-					Escribir "Categoría: Puede rescatar el semestre"
+					Escribir "Categorï¿½a: Puede rescatar el semestre"
 					ContadorRescatar <- ContadorRescatar + 1
 				Sino
-					Escribir "Categoría: Rendimiento regular potencial"
+					Escribir "Categorï¿½a: Rendimiento regular potencial"
 					ContadorRegulares <- ContadorRegulares + 1
 				FinSi
 			FinSi

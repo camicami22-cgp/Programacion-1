@@ -1,17 +1,17 @@
 // Nombre del archivo: GeneradorCURP_Optimo
-// Descripción: Algoritmo que obtiene datos personales y con ello genera la CURP 
-// Autores: Camila Galindo Páramo y Victor Ailem Martinez Martinez 
+// Descripciï¿½n: Algoritmo que obtiene datos personales y con ello genera la CURP 
+// Autores: Camila Galindo Pï¿½ramo y Victor Ailem Martinez Martinez 
 // Fecha: 10/10/2026 
-
+//Practica de Introduccion
 
 
 // ----------------------------------------------------------------------------
 // FUNCIONES DE LIMPIEZA DE TEXTO Y LETRAS
 // ----------------------------------------------------------------------------
 
-// Esta función nos sirve para quitarle los acentos y diéresis a cualquier texto.
-// Si el usuario mete "PÉREZ", lo deja como "PEREZ". Es IMPORTANTE para 
-// que no nos salgan símbolos raros en la CURP final.
+// Esta funciï¿½n nos sirve para quitarle los acentos y diï¿½resis a cualquier texto.
+// Si el usuario mete "Pï¿½REZ", lo deja como "PEREZ". Es IMPORTANTE para 
+// que no nos salgan sï¿½mbolos raros en la CURP final.
 Funcion textoLimpio <- NormalizarTexto(texto)
     Definir textoLimpio, c, temp Como Cadena
     Definir i Como Entero
@@ -19,21 +19,21 @@ Funcion textoLimpio <- NormalizarTexto(texto)
     Para i <- 1 Hasta Longitud(texto) Hacer
         c <- Subcadena(texto, i, i)
         Segun Mayusculas(c) Hacer
-            "Á", "Ä": temp <- "A"
-            "É", "Ë": temp <- "E"
-            "Í", "Ï": temp <- "I"
-            "Ó", "Ö": temp <- "O"
-            "Ú", "Ü": temp <- "U"
+            "ï¿½", "ï¿½": temp <- "A"
+            "ï¿½", "ï¿½": temp <- "E"
+            "ï¿½", "ï¿½": temp <- "I"
+            "ï¿½", "ï¿½": temp <- "O"
+            "ï¿½", "ï¿½": temp <- "U"
             De Otro Modo: temp <- Mayusculas(c)
         FinSegun
-        // Acuérdate: usamos Concatenar en vez de "+" porque el perfil 
-        // estricto cree que queremos sumar números y marca error.
+        // Acuï¿½rdate: usamos Concatenar en vez de "+" porque el perfil 
+        // estricto cree que queremos sumar nï¿½meros y marca error.
         textoLimpio <- Concatenar(textoLimpio, temp)
     FinPara
 FinFuncion
 
 // Validamos si la letra es vocal. Lo hice con Segun en vez de operadores 
-// lógicos (como >= o <=) porque a veces la tabla de caracteres da lata.
+// lï¿½gicos (como >= o <=) porque a veces la tabla de caracteres da lata.
 Funcion es_V <- EvaluarVocal(caracter)
     Definir es_V Como Logico
     Segun Mayusculas(caracter) Hacer
@@ -42,23 +42,23 @@ Funcion es_V <- EvaluarVocal(caracter)
     FinSegun
 FinFuncion
 
-// Lo mismo pero para consonantes. Se metio la Ñ porque aunque la CURP la trata 
-// distinto después, gramaticalmente sigue siendo consonante.
+// Lo mismo pero para consonantes. Se metio la ï¿½ porque aunque la CURP la trata 
+// distinto despuï¿½s, gramaticalmente sigue siendo consonante.
 Funcion es_C <- EvaluarConsonante(caracter)
     Definir es_C Como Logico
     Segun Mayusculas(caracter) Hacer
-        "B", "C", "D", "F", "G", "H", "J", "K", "L", "M", "N", "Ñ", "P", "Q", "R", "S", "T", "V", "W", "X", "Y", "Z": es_C <- Verdadero
+        "B", "C", "D", "F", "G", "H", "J", "K", "L", "M", "N", "ï¿½", "P", "Q", "R", "S", "T", "V", "W", "X", "Y", "Z": es_C <- Verdadero
         De Otro Modo: es_C <- Falso
     FinSegun
 FinFuncion
 
 // ----------------------------------------------------------------------------
-// REGLAS ESPECÍFICAS DE LA CURP (PREPOSICIONES, NOMBRES COMUNES, ETC)
+// REGLAS ESPECï¿½FICAS DE LA CURP (PREPOSICIONES, NOMBRES COMUNES, ETC)
 // ----------------------------------------------------------------------------
 
-// Aquí le quitamos cosas como "DE", "LA", "DEL", "MAC", etc. a los apellidos.
-// En lugar de hacer un arreglo gigante que nos crashee la memoria, lo metí 
-// en un ciclo que va cortando la palabra si encuentra estas sílabas al inicio.
+// Aquï¿½ le quitamos cosas como "DE", "LA", "DEL", "MAC", etc. a los apellidos.
+// En lugar de hacer un arreglo gigante que nos crashee la memoria, lo metï¿½ 
+// en un ciclo que va cortando la palabra si encuentra estas sï¿½labas al inicio.
 Funcion textoLimpio <- FiltrarPreposiciones(texto)
     Definir textoLimpio, p3, p4 Como Cadena
     Definir modificado Como Logico
@@ -84,34 +84,34 @@ Funcion textoLimpio <- FiltrarPreposiciones(texto)
         FinSi
     Hasta Que modificado = Falso
     
-    // Este While es solo por si quedaron espacios al principio después de limpiar
+    // Este While es solo por si quedaron espacios al principio despuï¿½s de limpiar
     Mientras Longitud(textoLimpio) > 1 Y Subcadena(textoLimpio, 1, 1) = " " Hacer
         textoLimpio <- Subcadena(textoLimpio, 2, Longitud(textoLimpio))
     FinMientras
 FinFuncion
 
 // La regla dice que si te llamas "MARIA FERNANDA" o "JOSE LUIS", la CURP se
-// hace con el segundo nombre. Aquí checamos eso.
+// hace con el segundo nombre. Aquï¿½ checamos eso.
 Funcion nomValido <- FiltrarNombre(nombres)
     Definir nomValido, nom, p1 Como Cadena
     Definir posEspacio, i Como Entero
     nom <- FiltrarPreposiciones(nombres)
     posEspacio <- 0
     
-    // Buscamos dónde está el primer espacio para separar el primer nombre
+    // Buscamos dï¿½nde estï¿½ el primer espacio para separar el primer nombre
     Para i <- 1 Hasta Longitud(nom) Hacer
         Si Subcadena(nom, i, i) = " " Y posEspacio = 0 Entonces
             posEspacio <- i
         FinSi
     FinPara
     
-    // Si hay dos nombres, checamos si el primero es José, María o sus atajos
+    // Si hay dos nombres, checamos si el primero es Josï¿½, Marï¿½a o sus atajos
     Si posEspacio > 0 Entonces
         p1 <- Subcadena(nom, 1, posEspacio - 1)
         Si p1 = "MARIA" O p1 = "MA" O p1 = "MA." O p1 = "JOSE" O p1 = "J" O p1 = "J." Entonces
             nomValido <- Subcadena(nom, posEspacio + 1, Longitud(nom))
         Sino
-            nomValido <- nom // Si no es José/María, usamos el primer nombre normal
+            nomValido <- nom // Si no es Josï¿½/Marï¿½a, usamos el primer nombre normal
         FinSi
     Sino
         nomValido <- nom // Si solo tiene un nombre, se queda ese
@@ -120,9 +120,9 @@ Funcion nomValido <- FiltrarNombre(nombres)
     nomValido <- FiltrarPreposiciones(nomValido)
 FinFuncion
 
-// Funciones para sacar la primera vocal o consonante INTERNA (de la posición 2 en adelante).
-// Le puse un condicional para que si la consonante interna es Ñ, me devuelva una X
-// (así lo pide la regla oficial de la CURP).
+// Funciones para sacar la primera vocal o consonante INTERNA (de la posiciï¿½n 2 en adelante).
+// Le puse un condicional para que si la consonante interna es ï¿½, me devuelva una X
+// (asï¿½ lo pide la regla oficial de la CURP).
 Funcion voc <- VocalInterna(palabra)
     Definir voc, c Como Cadena
     Definir i Como Entero
@@ -145,8 +145,8 @@ Funcion cons <- ConsonanteInterna(palabra)
         Para i <- 2 Hasta Longitud(palabra) Hacer
             c <- Subcadena(palabra, i, i)
             Si EvaluarConsonante(c) Y cons = "X" Entonces
-                Si c = "Ñ" Entonces
-                    cons <- "X" // Regla CURP: Ñ interna pasa como X
+                Si c = "ï¿½" Entonces
+                    cons <- "X" // Regla CURP: ï¿½ interna pasa como X
                 Sino
                     cons <- c
                 FinSi
@@ -157,13 +157,13 @@ FinFuncion
 
 // El filtro de malas palabras. Si las primeras 4 letras forman una palabra
 // de esta lista, cambiamos la segunda letra por una X (ej. PUTA -> PXTA).
-// Puedes agregarle más palabras al Segun si sientes que faltan.
+// Puedes agregarle mï¿½s palabras al Segun si sientes que faltan.
 Funcion segura <- EvitarInconvenientes(codigo)
     Definir segura Como Cadena
     segura <- codigo
     Segun codigo Hacer
         "BACA", "BAKA", "BUEI", "BUEY", "CACA", "CACO", "CAGA", "CAGO", "COGE", "CULO", "FALO", "FETO", "JOTO", "KACA", "LOCO", "MAME", "MEAR", "MOCO", "MULA", "PEDA", "PEDO", "PENE", "PUTA", "PUTO", "RATA", "ROBO", "RUIN", "SENO", "TETA", "VACA", "VAGO":
-            // OJO: Anidé los Concatenar para no usar el símbolo +
+            // OJO: Anidï¿½ los Concatenar para no usar el sï¿½mbolo +
             segura <- Concatenar(Concatenar(Subcadena(codigo, 1, 1), "X"), Subcadena(codigo, 3, 4))
     FinSegun
 FinFuncion
@@ -178,7 +178,7 @@ Funcion clave <- ClaveEntidad(entidad)
         "BAJA CALIFORNIA": clave <- "BC"
         "BAJA CALIFORNIA SUR": clave <- "BS"
 			// ... (resto de estados) ...
-        "SONORA": clave <- "SR" // ¡Aquí andamos!
+        "SONORA": clave <- "SR" // ï¿½Aquï¿½ andamos!
         "VERACRUZ": clave <- "VZ"
         "YUCATAN": clave <- "YN"
         "ZACATECAS": clave <- "ZS"
@@ -196,7 +196,7 @@ Algoritmo GeneradorCURP_Optimo
     Definir pos1, pos2, pos3, pos4, pos14, pos15, pos16 Como Cadena
     Definir iniciales, curp16 Como Cadena
     
-    // Interfaz básica para pedir datos
+    // Interfaz bï¿½sica para pedir datos
     Escribir "--- GENERADOR DE CURP ---"
     Escribir "Nombre(s): "
     Leer nombres
@@ -206,8 +206,8 @@ Algoritmo GeneradorCURP_Optimo
     Leer apMaterno
 	
     // Se piden las fechas ya como texto para ya poder convertirlo 
-    // Números enteros a texto y que se pierdan los ceros a la izquierda (ej. 05)
-    Escribir "Año de Nacimiento (Solo 2 digitos, ej. 03 o 98): "
+    // Nï¿½meros enteros a texto y que se pierdan los ceros a la izquierda (ej. 05)
+    Escribir "Aï¿½o de Nacimiento (Solo 2 digitos, ej. 03 o 98): "
     Leer anioTexto
     Escribir "Mes de Nacimiento (2 digitos, ej. 05): "
     Leer mesTexto
@@ -223,24 +223,24 @@ Algoritmo GeneradorCURP_Optimo
     matLimpio <- FiltrarPreposiciones(apMaterno)
     nomLimpio <- FiltrarNombre(nombres)
     
-    // --- LÓGICA DE APELLIDO PATERNO ---
+    // --- Lï¿½GICA DE APELLIDO PATERNO ---
     Si Longitud(patLimpio) > 0 Entonces
         pos1 <- Subcadena(patLimpio, 1, 1)
-        Si pos1 = "Ñ" Entonces
-            pos1 <- "X" // Si el apellido empieza con Ñ, va X
+        Si pos1 = "ï¿½" Entonces
+            pos1 <- "X" // Si el apellido empieza con ï¿½, va X
         FinSi
         pos2 <- VocalInterna(patLimpio)
         pos14 <- ConsonanteInterna(patLimpio)
     Sino
-        // En teoría siempre hay paterno, pero por si acaso meten cadena vacía
+        // En teorï¿½a siempre hay paterno, pero por si acaso meten cadena vacï¿½a
         pos1 <- "X"; pos2 <- "X"; pos14 <- "X"
     FinSi
     
-    // --- LÓGICA DE APELLIDO MATERNO ---
+    // --- Lï¿½GICA DE APELLIDO MATERNO ---
     // Si no tiene apellido materno (pusieron X), todas sus posiciones se vuelven X
     Si Longitud(matLimpio) > 0 Y Mayusculas(matLimpio) <> "X" Entonces
         pos3 <- Subcadena(matLimpio, 1, 1)
-        Si pos3 = "Ñ" Entonces
+        Si pos3 = "ï¿½" Entonces
             pos3 <- "X"
         FinSi
         pos15 <- ConsonanteInterna(matLimpio)
@@ -248,10 +248,10 @@ Algoritmo GeneradorCURP_Optimo
         pos3 <- "X"; pos15 <- "X"
     FinSi
     
-    // --- LÓGICA DE NOMBRE ---
+    // --- Lï¿½GICA DE NOMBRE ---
     Si Longitud(nomLimpio) > 0 Entonces
         pos4 <- Subcadena(nomLimpio, 1, 1)
-        Si pos4 = "Ñ" Entonces
+        Si pos4 = "ï¿½" Entonces
             pos4 <- "X"
         FinSi
         pos16 <- ConsonanteInterna(nomLimpio)
@@ -261,15 +261,15 @@ Algoritmo GeneradorCURP_Optimo
     
     // --- ENSAMBLE DE LA CURP ---
     
-    // Primero armamos las 4 iniciales con puro Concatenar para evitar el error de tipos numéricos
+    // Primero armamos las 4 iniciales con puro Concatenar para evitar el error de tipos numï¿½ricos
     iniciales <- Concatenar(pos1, pos2)
     iniciales <- Concatenar(iniciales, pos3)
     iniciales <- Concatenar(iniciales, pos4)
     
-    // Pasamos las 4 iniciales por el filtro de groserías
+    // Pasamos las 4 iniciales por el filtro de groserï¿½as
     iniciales <- EvitarInconvenientes(iniciales)
     
-    // Ahora vamos armando la CURP completa de 16 dígitos, igual, línea por línea.
+    // Ahora vamos armando la CURP completa de 16 dï¿½gitos, igual, lï¿½nea por lï¿½nea.
     curp16 <- Concatenar(iniciales, anioTexto)
     curp16 <- Concatenar(curp16, mesTexto)
     curp16 <- Concatenar(curp16, diaTexto)
